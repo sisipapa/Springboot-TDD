@@ -31,7 +31,7 @@ dependencies {
 }
 
 //querydsl 추가 시작
-def querydslDir = '$buildDir/generated/querydsl'
+def querydslDir = 'build/generated/querydsl'
 
 querydsl {
     jpa = true
