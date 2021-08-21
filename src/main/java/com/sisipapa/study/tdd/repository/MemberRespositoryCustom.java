@@ -17,13 +17,13 @@ public class MemberRespositoryCustom {
 
     /**
      * id로 회원조회
-     * @param findMember
+     * @param id
      * @return
      */
-    public MemberDTO findOne(MemberDTO findMember) {
+    public MemberDTO findOne(Long id) {
 
         BooleanBuilder builder = new BooleanBuilder();
-        builder.and(member.id.eq(findMember.getId()));
+        builder.and(member.id.eq(id));
 
         MemberDTO memberDTO = factory
                 .select(Projections.constructor(MemberDTO.class,

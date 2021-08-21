@@ -28,6 +28,8 @@ dependencies {
 
     runtimeOnly  'com.h2database:h2'                                        // H2 DB설정
     implementation 'com.querydsl:querydsl-jpa'                              // querydsl 설정
+    implementation 'org.apache.commons:commons-lang3:3.0'                   // StringUtils
+
 }
 
 //querydsl 추가 시작
