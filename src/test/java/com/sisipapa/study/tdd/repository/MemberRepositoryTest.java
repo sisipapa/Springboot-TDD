@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MemberRepositoryTest {
 
     @Autowired
-    MemberRespository memberRespository;
+    MemberRepository memberRespository;
 
     @Autowired
-    MemberRespositoryCustom memberRespositoryCustom;
+    MemberRepositoryCustom memberRespositoryCustom;
 
     @Test
     void save(){

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import static com.sisipapa.study.tdd.entity.QMember.member;
 
 @Repository
-public class MemberRespositoryCustom {
+public class MemberRepositoryCustom {
 
     @Autowired
     JPAQueryFactory factory;

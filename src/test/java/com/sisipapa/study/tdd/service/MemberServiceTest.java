@@ -1,10 +1,14 @@
 package com.sisipapa.study.tdd.service;
 
 import com.sisipapa.study.tdd.dto.MemberDTO;
+import com.sisipapa.study.tdd.entity.Member;
+import com.sisipapa.study.tdd.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,6 +17,9 @@ public class MemberServiceTest {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    MemberRepository repository;
 
     @Test
     void saveMember(){
@@ -35,7 +42,9 @@ public class MemberServiceTest {
 
     @Test
     void deleteMember(){
-        Long totalCount = memberService.deleteMember(1L);
-        assertThat(totalCount).isEqualTo(4L);
+        memberService.deleteMember(1L);
+
+        Optional<Member> member = repository.findById(1L);
+        assertThat(member).isEqualTo(Optional.empty());
     }
 }

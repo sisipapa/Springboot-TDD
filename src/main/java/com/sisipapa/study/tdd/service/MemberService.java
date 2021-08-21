@@ -2,8 +2,8 @@ package com.sisipapa.study.tdd.service;
 
 import com.sisipapa.study.tdd.dto.MemberDTO;
 import com.sisipapa.study.tdd.entity.Member;
-import com.sisipapa.study.tdd.repository.MemberRespository;
-import com.sisipapa.study.tdd.repository.MemberRespositoryCustom;
+import com.sisipapa.study.tdd.repository.MemberRepository;
+import com.sisipapa.study.tdd.repository.MemberRepositoryCustom;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class MemberService {
 
-    private final MemberRespository respository;
-    private final MemberRespositoryCustom respositoryCustom;
+    private final MemberRepository respository;
+    private final MemberRepositoryCustom respositoryCustom;
 
     /**
      * 사용자등록
@@ -52,9 +52,12 @@ public class MemberService {
         return findMember;
     }
 
-
-    public Long deleteMember(long l) {
+    /**
+     * l 회원삭제 후 전체회원 카운트 리턴
+     * @param l
+     * @return
+     */
+    public void deleteMember(long l) {
         respository.deleteById(l);
-        return respository.count();
     }
 }
