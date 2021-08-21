@@ -39,11 +39,4 @@ public class MemberRespositoryCustom {
         return memberDTO;
     }
 
-    public void save(MemberDTO member) {
-
-    }
-
-    public void delete(MemberDTO deleteMember) {
-    }
-
 }
