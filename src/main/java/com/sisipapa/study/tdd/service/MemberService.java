@@ -3,7 +3,6 @@ package com.sisipapa.study.tdd.service;
 import com.sisipapa.study.tdd.dto.MemberDTO;
 import com.sisipapa.study.tdd.entity.Member;
 import com.sisipapa.study.tdd.repository.MemberRepository;
-import com.sisipapa.study.tdd.repository.MemberRepositoryCustom;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberRepository respository;
-    private final MemberRepositoryCustom respositoryCustom;
 
     /**
      * 사용자등록
@@ -48,8 +46,15 @@ public class MemberService {
      * @return
      */
     public MemberDTO findOneMember(long l) {
-        MemberDTO findMember = respositoryCustom.findOne(l);
-        return findMember;
+        Member findMember = respository.findById(l).get();
+        MemberDTO memberDTO = MemberDTO.builder()
+                .id(findMember.getId())
+                .name(findMember.getName())
+                .phone(findMember.getPhone())
+                .gender(findMember.getGender())
+                .build();
+
+        return memberDTO;
     }
 
     /**
