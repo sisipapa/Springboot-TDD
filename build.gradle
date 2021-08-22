@@ -1,7 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'   // querydsl 설정 추가
+    //id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'   // querydsl 설정 추가
     id 'java'
 }
 
@@ -27,29 +27,29 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     runtimeOnly  'com.h2database:h2'                                        // H2 DB설정
-    implementation 'com.querydsl:querydsl-jpa'                              // querydsl 설정
+    //implementation 'com.querydsl:querydsl-jpa'                              // querydsl 설정
 
 }
 
 //querydsl 추가 시작
-def querydslDir = 'build/generated/querydsl'
-
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-
-sourceSets {
-    main.java.srcDir querydslDir
-}
-
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
-}
+//def querydslDir = 'build/generated/querydsl'
+//
+//querydsl {
+//    jpa = true
+//    querydslSourcesDir = querydslDir
+//}
+//
+//sourceSets {
+//    main.java.srcDir querydslDir
+//}
+//
+//configurations {
+//    querydsl.extendsFrom compileClasspath
+//}
+//
+//compileQuerydsl {
+//    options.annotationProcessorPath = configurations.querydsl
+//}
 //querydsl 추가 끝
 
 test {
