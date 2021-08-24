@@ -228,4 +228,6 @@ public class MemberController {
 
 ## 참고  
 [Taes-k DevLog - TDD Spring 실무에서 적용하기](https://taes-k.github.io/2021/03/19/spring-tdd-practice/)  
-[찰나의 개발흔적 - [springboot] 연락처 관리 프로젝트(TDD)](https://daddyprogrammer.org/post/4347/spring-cloud-msa-configuration-server/)  
+[찰나의 개발흔적 - [springboot] 연락처 관리 프로젝트(TDD)](https://daddyprogrammer.org/post/4347/spring-cloud-msa-configuration-server/)    
+  
+[SISIPAPA 노트연결](https://sisipapa.github.io/blog/2021/08/18/Springboot-TDD/)
