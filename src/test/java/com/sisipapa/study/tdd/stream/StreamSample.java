@@ -1,5 +1,6 @@
-package com.sisipapa.study.tdd;
+package com.sisipapa.study.tdd.stream;
 
+import com.sisipapa.study.tdd.Person;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

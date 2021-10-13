@@ -1,4 +1,4 @@
-package com.sisipapa.study.tdd;
+package com.sisipapa.study.tdd.stream;
 
 import org.junit.jupiter.api.Test;
 
