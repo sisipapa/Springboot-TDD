@@ -1,7 +1,10 @@
 package com.sisipapa.study.tdd.stream;
 
+import com.sisipapa.study.tdd.dto.MongoConnection;
+import org.json.simple.parser.JSONParser;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -64,4 +67,18 @@ public class StreamBasic {
         assertEquals(6, stream.count());
 //        Assertions.assertNotEquals(list.size(), stream.count());
     }
+
+    @Test
+    void customSorted(){
+        JSONParser parser = new JSONParser();
+        try{
+            InputStream inputStream = StreamBasic.class.getResourceAsStream("connection.json");
+        }catch(Exception e){
+
+        }
+
+    }
 }
+
+
+

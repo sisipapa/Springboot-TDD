@@ -30,6 +30,10 @@ dependencies {
     runtimeOnly  'com.h2database:h2'                                        // H2 DB설정
     //implementation 'com.querydsl:querydsl-jpa'                              // querydsl 설정
 
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+
 }
 
 //querydsl 추가 시작
