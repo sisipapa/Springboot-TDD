@@ -1,10 +1,14 @@
 package com.sisipapa.study.tdd.stream;
 
 import com.sisipapa.study.tdd.dto.MongoConnection;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -72,11 +76,14 @@ public class StreamBasic {
     void customSorted(){
         JSONParser parser = new JSONParser();
         try{
-            InputStream inputStream = StreamBasic.class.getResourceAsStream("connection.json");
+            Reader reader = new FileReader("C:\\projects\\Springboot-TDD\\src\\test\\java\\com\\sisipapa\\study\\tdd\\stream\\connection.json");
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            List<String> keys = (List<String>) jsonObject.keySet().stream().sorted().collect(Collectors.toList());
+            List<MongoConnection> sortList = keys.stream().map(key -> MongoConnection.builder().host(key).count(((Long)jsonObject.get(key)).intValue()).build()).collect(Collectors.toList());
+            sortList.stream().forEach(System.out::println);
         }catch(Exception e){
-
+            e.printStackTrace();
         }
-
     }
 }
 
