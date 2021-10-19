@@ -1,6 +1,9 @@
 package com.sisipapa.study.tdd.stream;
 
 import com.sisipapa.study.tdd.dto.MongoConnection;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.jupiter.api.Test;
@@ -9,9 +12,7 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -19,6 +20,17 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StreamBasic {
+
+    @Test
+    void basic(){
+        OptionalInt min = IntStream.of(1, 3, 5, 7, 9).min();
+        assertEquals(1,1);
+
+        int max = IntStream.of().max().orElse(0);
+        assertEquals(0,0);
+
+        IntStream.of(1, 3, 5, 7, 9).average().ifPresent(System.out::println);
+    }
 
     @Test
     void peek(){
@@ -73,6 +85,56 @@ public class StreamBasic {
     }
 
     @Test
+    void collect(){
+        List<Product> productList = Arrays.asList(
+                new Product(23, "potatoes"),
+                new Product(14, "orange"),
+                new Product(13, "lemon"),
+                new Product(23, "bread"),
+                new Product(13, "sugar")
+        );
+
+        List<String> nameList = productList.stream()
+                .map(Product::getName)
+                .collect(Collectors.toList());
+        assertEquals(nameList.get(0), "potatoes");
+
+        String listToString = productList.stream()
+                .map(Product::getName)
+                .collect(Collectors.joining(", ", "<", ">"));
+        System.out.println(listToString);
+
+        Double averageAmount = productList.stream()
+                .collect(Collectors.averagingInt(Product::getAmount));
+        System.out.println(averageAmount);
+
+        Integer summingAmount1 = productList.stream()
+                .collect(Collectors.summingInt(Product::getAmount));
+        System.out.println(summingAmount1);
+
+        Integer summingAmount2 = productList.stream()
+                .mapToInt(Product::getAmount).sum();
+        System.out.println(summingAmount2);
+
+        IntSummaryStatistics statistics = productList.stream()
+                .collect(Collectors.summarizingInt(Product::getAmount));
+        System.out.println(statistics);
+
+        Map<Integer, List<Product>> groupByList = productList.stream()
+                .collect(Collectors.groupingBy(Product::getAmount));
+        System.out.println(groupByList);
+
+        Map<Boolean, List<Product>> partitionList = productList.stream()
+                .collect(Collectors.partitioningBy(product -> product.getAmount() > 15));
+        System.out.println(partitionList);
+
+        boolean allMatch = productList.stream()
+                .allMatch(p -> p.getName().length() > 3);
+        System.out.println(allMatch);
+
+    }
+
+    @Test
     void customSorted(){
         JSONParser parser = new JSONParser();
         try{
@@ -83,6 +145,25 @@ public class StreamBasic {
             sortList.stream().forEach(System.out::println);
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @NoArgsConstructor
+    static class Product{
+        private int amount;
+        private String name;
+
+        public int getAmount(){
+            return this.amount;
+        }
+
+        public String getName(){
+            return this.name;
+        }
+
+        public Product(int amount, String name){
+            this.amount = amount;
+            this.name = name;
         }
     }
 }
