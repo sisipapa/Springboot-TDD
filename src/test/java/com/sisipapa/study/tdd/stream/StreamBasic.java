@@ -1,6 +1,7 @@
 package com.sisipapa.study.tdd.stream;
 
 import com.sisipapa.study.tdd.dto.MongoConnection;
+import com.sisipapa.study.tdd.dto.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +50,20 @@ public class StreamBasic {
                 .map(str -> str.toLowerCase(Locale.ROOT))
                 .forEach(System.out::println);
 
+    }
+
+    @Test
+    void flatMap(){
+        List<Student> students = Arrays.asList(
+                new Student(80, 90, 75),
+                new Student(70, 100, 75),
+                new Student(85, 90, 85),
+                new Student(80, 100, 90)
+        );
+
+        students.stream()
+                .flatMapToInt(student -> IntStream.of(student.getKor(), student.getEng(), student.getMath())).average()
+                .ifPresent(avg -> System.out.println(Math.round(avg * 10) / 10.0));
     }
 
     @Test

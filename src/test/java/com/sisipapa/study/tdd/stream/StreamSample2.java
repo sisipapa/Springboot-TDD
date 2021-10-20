@@ -4,10 +4,10 @@ import com.sisipapa.study.tdd.dto.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ForkJoinPool;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StreamSample2 {
 
@@ -46,4 +46,43 @@ public class StreamSample2 {
         System.out.println(result.get("미국").get("뉴욕"));
     }
 
+    @Test
+    void reduce(){
+        OptionalInt oInt = IntStream.range(1,4)
+                .reduce((a, b)->{
+                    return Integer.sum(a, b);
+                });
+
+        oInt.ifPresent(result -> System.out.println(result));
+
+        int oInt2 = IntStream.range(1,4)
+                .reduce(10, (a, b)->{
+                    return Integer.sum(a, b);
+                });
+
+        System.out.println(oInt2);
+
+    }
+
+    @Test
+    void parallelStream(){
+
+        ForkJoinPool commonPool = ForkJoinPool.commonPool();
+        System.out.println(commonPool.getParallelism());
+
+        Arrays.asList("a", "b", "c", "d", "e")
+                .parallelStream()
+                .filter(s -> {
+                    System.out.format("filter: %s [%s]\n", s, Thread.currentThread().getName());
+                    return true;
+                })
+                .map(s -> {
+                    System.out.format("map: %s [%s]\n", s, Thread.currentThread().getName());
+                    return s.toUpperCase();
+                })
+                .forEach(s ->
+                        System.out.format("forEach: %s [%s]\n", s, Thread.currentThread().getName())
+                );
+
+    }
 }
