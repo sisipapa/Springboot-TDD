@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Quiz {
@@ -84,20 +85,45 @@ public class Quiz {
     @Test
     void q5(){
         // Q5. 밀라노에 거래자가 있는지
+        boolean answer5 = transactions.stream()
+                .anyMatch(transaction -> transaction.getTrader().getCity().equals("Milan"));
+        System.out.println(answer5);
     }
 
     @Test
     void q6(){
         // Q6. 케임브리지에 거주하는 거래자의 모든 트랜잭션 값 출력
+        List<Integer> answer6 = transactions.stream()
+                .filter(transaction -> transaction.getTrader().getCity().equals("Cambridge"))
+                .map(transaction -> transaction.getValue())
+                .collect(Collectors.toList());
+        answer6.forEach(System.out::println);
     }
 
     @Test
     void q7(){
         // Q7. 전체 트랜잭션 중 최댓값
+        int answer7 = transactions.stream()
+                .mapToInt(Transaction::getValue)
+//                .max()
+                .reduce(Integer::max)
+                .orElse(-1);
+        System.out.println(answer7);
     }
 
     @Test
     void q8(){
         // Q8. 전체 트랜잭션 중 최솟값
+        Integer answer8 = transactions.stream()
+                .mapToInt(transaction -> transaction.getValue())
+//                .min()
+                .reduce(Integer::min)
+                .orElseThrow(RuntimeException::new);
+        System.out.println(answer8);
+
+        Optional<Transaction> min = transactions.stream()
+                .min(Comparator.comparingInt(Transaction::getValue));
+        System.out.println(min.get().getValue());
+
     }
 }
